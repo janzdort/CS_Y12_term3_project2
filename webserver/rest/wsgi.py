@@ -3,12 +3,9 @@ from flask_restful import Api, Resource
 
 PORT = 21370
 
-app = Flask('ಠ_ಠ')
+app = Flask(__name__)
 api = Api(app)
-valid_user = {
-    "login": "AKaczus",
-    "password": "12345"
-}
+
 
 class MyResource(Resource):
 
@@ -16,14 +13,12 @@ class MyResource(Resource):
         print(request.values)
         if request.is_json:
             data = request.get_json()
-            if data == valid_user:
-                return '', 200
-            else:
-                return '', 403
+            print|(data)
+            return data, 200
         else:
             abort(422)
 
-api.add_resource(MyResource, '/login')
+api.add_resource(MyResource, '/id')
 
 if __name__ == '__main__':
     app.run(port=PORT)
